@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -17,29 +20,41 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
+        public IDataResult<List<Brand>> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            return _brandDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandsListed);
         }
 
-        public Brand GetById(int id)
+        public IDataResult<Brand> GetById(int id)
         {
-           return _brandDal.Get(p=>p.Id==id);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<Brand>(Messages.MaintenanceTime);
+            }
+
+            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.Id == id), Messages.BrandDetailListed);
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
         }
 
-        public void Update(Brand brand)
+        public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandUpdated);
         }
 
-        public void Delete(Brand brand)
+        public IResult Delete(Brand brand)
         {
            _brandDal.Delete(brand);
+           return new SuccessResult(Messages.BrandDeleted);
         }
     }
 }

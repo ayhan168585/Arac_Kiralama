@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.Dtos;
 
@@ -9,14 +11,14 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-        List<Car> GetAll(Expression<Func<Car, bool>> filter = null);
-        List<CarDetailDto> GetCarDetail(Expression<Func<CarDetailDto, bool>> filter = null);
-        CarDetailDto GetCarById(int carId);
-        List<CarDetailDto> GetCarsByBrandId(int brandId);
-        List<CarDetailDto> GetCarsByColorId(int colorId);
-        Car GetById(Expression<Func<Car, bool>> filter);
-        void Add(Car car);
-        void Update(Car car);
-        void Delete(Car car);
+       IDataResult<List<Car>> GetAll(Expression<Func<Car, bool>> filter = null);
+        IDataResult<List<CarDetailDto>> GetCarDetail(Expression<Func<CarDetailDto, bool>> filter = null);
+        IDataResult<CarDetailDto> GetCarById(int carId);
+        IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId);
+        IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId);
+        IDataResult<Car> GetById(int id);
+        IResult Add(Car car);
+        IResult Update(Car car);
+        IResult Delete(Car car);
     }
 }

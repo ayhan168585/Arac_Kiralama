@@ -4,6 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
@@ -19,44 +22,67 @@ namespace Business.Concrete
             _creditCardDal = creditCardDal;
         }
 
-        public List<CreditCard> GetAll(Expression<Func<CreditCard, bool>> filter = null)
+        public IDataResult<List<CreditCard>> GetAll(Expression<Func<CreditCard, bool>> filter = null)
         {
-            return _creditCardDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<CreditCard>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CreditCard>>(_creditCardDal.GetAll(),Messages.CreditCardsListed);
         }
 
-        public List<CreditCardDetailDto> GetCreditCardDetail(Expression<Func<CreditCardDetailDto, bool>> filter = null)
+        public IDataResult<List<CreditCardDetailDto>> GetCreditCardDetail(Expression<Func<CreditCardDetailDto, bool>> filter = null)
         {
-            return _creditCardDal.GetCreditCardDetail();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<CreditCardDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CreditCardDetailDto>>(_creditCardDal.GetCreditCardDetail(),Messages.CreditCardsListed);
         }
 
-        public List<CreditCardDetailDto> GetCreditCardDetailByBankId(int bankId)
+        public IDataResult<List<CreditCardDetailDto>> GetCreditCardDetailByBankId(int bankId)
         {
-            return _creditCardDal.GetCreditCardDetail(p => p.BankId == bankId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<CreditCardDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CreditCardDetailDto>>(_creditCardDal.GetCreditCardDetail(p => p.BankId == bankId),Messages.CreditCardsListedByBank);
         }
 
-        public CreditCardDetailDto GetCreditCardDetailById(int cardid)
+        public IDataResult<CreditCardDetailDto> GetCreditCardDetailById(int id)
         {
-            return _creditCardDal.GetCreditCardDetail(p => p.CreditCardId == cardid).SingleOrDefault();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<CreditCardDetailDto>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<CreditCardDetailDto>(_creditCardDal.GetCreditCardDetail(p => p.CreditCardId == id).SingleOrDefault(),Messages.CreditCardDetailListed);
         }
 
-        public CreditCard GetById(int id)
+        public IDataResult<CreditCard> GetById(int id)
         {
-            return _creditCardDal.Get(p => p.Id == id);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<CreditCard>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<CreditCard>(_creditCardDal.Get(p => p.Id == id),Messages.CreditCardDetailListed);
         }
 
-        public void Add(CreditCard card)
+        public IResult Add(CreditCard card)
         {
            _creditCardDal.Add(card);
+           return new SuccessResult(Messages.CreditCardAdded);
         }
 
-        public void Update(CreditCard card)
+        public IResult Update(CreditCard card)
         {
            _creditCardDal.Update(card);
+           return new SuccessResult(Messages.CreditCardUpdated);
         }
 
-        public void Delete(CreditCard card)
+        public IResult Delete(CreditCard card)
         {
            _creditCardDal.Delete(card);
+           return new SuccessResult(Messages.CreditCardDeleted);
         }
     }
 }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
@@ -19,64 +22,103 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        public List<Rental> GetAll(Expression<Func<Rental, bool>> filter = null)
+        public IDataResult<List<Rental>> GetAll(Expression<Func<Rental, bool>> filter = null)
         {
-            return _rentalDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<Rental>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),Messages.RentalsListed);
         }
 
-        public List<RentalDetailDto> GetRentalDetail(Expression<Func<RentalDetailDto, bool>> filter = null)
+        public IDataResult<List<RentalDetailDto>> GetRentalDetail(Expression<Func<RentalDetailDto, bool>> filter = null)
         {
-            return _rentalDal.GetRentalDetails();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.RentalsListed);
         }
 
-        public RentalDetailDto GetRentalById(int rentalId)
+        public IDataResult<RentalDetailDto> GetRentalById(int rentalId)
         {
-            return _rentalDal.GetRentalDetails(p => p.Id == rentalId).SingleOrDefault();
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<RentalDetailDto>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<RentalDetailDto>(_rentalDal.GetRentalDetails(p => p.Id == rentalId).SingleOrDefault(),Messages.RentalDetailListed);
         }
 
-        public List<RentalDetailDto> GetCarsByCarId(int carId)
+        public IDataResult<List<RentalDetailDto>> GetRentalsByCarId(int carId)
         {
-            return _rentalDal.GetRentalDetails(p => p.CarId == carId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.CarId == carId),Messages.RentalsListedByCarId);
         }
 
-        public List<RentalDetailDto> GetCarsByBrandId(int brandId)
+        public IDataResult<List<RentalDetailDto>> GetRentalsByBrandId(int brandId)
         {
-            return _rentalDal.GetRentalDetails(p => p.BrandId == brandId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>> (Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.BrandId == brandId),Messages.RentalsListedByBrand);
         }
 
-        public List<RentalDetailDto> GetCarsByModelId(int modelId)
+        public IDataResult<List<RentalDetailDto>> GetRentalsByModelId(int modelId)
         {
-            return _rentalDal.GetRentalDetails(p => p.ModelId == modelId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.ModelId == modelId),Messages.RentalsListedByModel);
         }
 
-        public List<RentalDetailDto> GetCarsByUserId(int userId)
+        public IDataResult<List<RentalDetailDto>> GetRentalsByUserId(int userId)
         {
-            return _rentalDal.GetRentalDetails(p => p.UserId == userId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.UserId == userId),Messages.RentalsListedByUser);
         }
 
-        public List<RentalDetailDto> GetCarsByCustomerId(int customerId)
+        public IDataResult<List<RentalDetailDto>> GetRentalsByCustomerId(int customerId)
         {
-            return _rentalDal.GetRentalDetails(p => p.CustomerId == customerId);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.CustomerId == customerId),Messages.RentalsListedByCustomer);
         }
 
-        public Rental GetById(int id)
+        public IDataResult<Rental> GetById(int id)
         {
-            return _rentalDal.Get(p => p.Id == id);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<Rental>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.Id == id),Messages.RentalDetailListed);
         }
 
-        public void Add(Rental rental)
+        public IResult Add(Rental rental)
         {
            _rentalDal.Add(rental);
+           return new SuccessResult(Messages.RentalAdded);
         }
 
-        public void Update(Rental rental)
+        public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
+            return new SuccessResult(Messages.RentalUpdated);
         }
 
-        public void Delete(Rental rental)
+        public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
+            return new SuccessResult(Messages.RentalDeleted);
         }
     }
 }

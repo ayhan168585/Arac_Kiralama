@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core;
+using Core.Utilities.Results;
 using Entities.Concrete;
 
 namespace Business.Abstract
 {
     public interface IBankService
     {
-        List<Bank> GetAll(Expression<Func<Bank, bool>> filter = null);
-        Bank GetById(int id);
-        void Add(Bank bank);
-        void Update(Bank bank);
-        void Delete(Bank bank);
+        IDataResult<List<Bank>> GetAll(Expression<Func<Bank, bool>> filter = null);
+        IDataResult<Bank> GetById(int id);
+        IResult Add(Bank bank);
+        IResult Update(Bank bank);
+        IResult Delete(Bank bank);
     }
 }

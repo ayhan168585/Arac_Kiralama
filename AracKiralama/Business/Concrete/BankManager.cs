@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -17,29 +20,42 @@ namespace Business.Concrete
             _bankDal = bankDal;
         }
 
-        public List<Bank> GetAll(Expression<Func<Bank, bool>> filter = null)
+        public IDataResult<List<Bank>> GetAll(Expression<Func<Bank, bool>> filter = null)
         {
-            return _bankDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<Bank>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<Bank>>(_bankDal.GetAll(),Messages.BanksListed);
         }
 
-        public Bank GetById(int id)
+        public IDataResult<Bank> GetById(int id)
         {
-            return _bankDal.Get(p => p.Id == id);
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<Bank>(Messages.MaintenanceTime); 
+            }
+
+            return new SuccessDataResult<Bank>(_bankDal.Get(p => p.Id == id), Messages.BankDetailListed);
         }
 
-        public void Add(Bank bank)
+        public IResult Add(Bank bank)
         {
            _bankDal.Add(bank);
+           return new SuccessResult(Messages.BankAdded);
+
         }
 
-        public void Update(Bank bank)
+        public IResult Update(Bank bank)
         {
             _bankDal.Update(bank);
+            return new SuccessResult(Messages.BankUpdated);
         }
 
-        public void Delete(Bank bank)
+        public IResult Delete(Bank bank)
         {
            _bankDal.Delete(bank);
+           return new SuccessResult(Messages.BankDeleted);
         }
     }
 }

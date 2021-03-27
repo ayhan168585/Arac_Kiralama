@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core;
 using Core.Entities.Concrete;
+using Core.Utilities.Results;
 
 namespace Business.Abstract
 {
     public interface IUserService
     {
-        List<User> GetAll(Expression<Func<User, bool>> filter = null);
-        User GetById(int id);
-        void Add(User user);
-        void Update(User user);
-        void Delete(User user);
+        IDataResult<List<User>> GetAll(Expression<Func<User, bool>> filter = null);
+        IDataResult<User> GetById(int id);
+        IResult Add(User user);
+        IResult Update(User user);
+        IResult Delete(User user);
     }
 }

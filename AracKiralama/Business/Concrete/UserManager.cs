@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core;
 using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -17,29 +20,40 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public List<User> GetAll(Expression<Func<User, bool>> filter = null)
+        public IDataResult<List<User>> GetAll(Expression<Func<User, bool>> filter = null)
         {
-            return _userDal.GetAll();
+            if (DateTime.Now.Hour==22)
+            {
+                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UsersListed);
         }
 
-        public User GetById(int id)
+        public IDataResult<User> GetById(int id)
         {
-            return _userDal.Get(p => p.Id == id);
+            if (DateTime.Now.Hour == 22)
+            {
+                return new ErrorDataResult<User>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<User>(_userDal.Get(p => p.Id == id),Messages.UserDetailListed);
         }
 
-        public void Add(User user)
+        public IResult Add(User user)
         {
            _userDal.Add(user);
+           return new SuccessResult(Messages.UserAdded);
         }
 
-        public void Update(User user)
+        public IResult Update(User user)
         {
             _userDal.Update(user);
+            return new SuccessResult(Messages.UserUpdated);
         }
 
-        public void Delete(User user)
+        public IResult Delete(User user)
         {
            _userDal.Delete(user);
+           return new SuccessResult(Messages.UserDeleted);
         }
     }
 }
