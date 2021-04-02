@@ -6,6 +6,7 @@ using System.Text;
 using Business.Abstract;
 using Business.Constants;
 using Core;
+using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -69,13 +70,17 @@ namespace Business.Concrete
 
         public IResult Add(CreditCard card)
         {
+            BusinessRules.Run(CheckIfCreditCardNumberOfBankExist(card.BankId, card.CreditCardNumber),CheckIfCreditCardValid());
+
            _creditCardDal.Add(card);
            return new SuccessResult(Messages.CreditCardAdded);
         }
 
         public IResult Update(CreditCard card)
         {
-           _creditCardDal.Update(card);
+            BusinessRules.Run(CheckIfCreditCardNumberOfBankExist(card.BankId, card.CreditCardNumber), CheckIfCreditCardValid());
+
+            _creditCardDal.Update(card);
            return new SuccessResult(Messages.CreditCardUpdated);
         }
 
@@ -84,5 +89,28 @@ namespace Business.Concrete
            _creditCardDal.Delete(card);
            return new SuccessResult(Messages.CreditCardDeleted);
         }
+
+        public IResult CheckIfCreditCardNumberOfBankExist(int bankId, string creditCardNumber)
+        {
+            var result = _creditCardDal.GetAll(p => p.BankId == bankId)
+                .Where(p => p.CreditCardNumber == creditCardNumber).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.CreditCardNumberOfThisBankExistError);
+            }
+            return new SuccessResult();
+        }
+
+        public IResult CheckIfCreditCardValid()
+        {
+            var result = _creditCardDal.GetAll(p => p.ValidDate >= DateTime.Now).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.InvalidCreditCard);
+            }
+            return new SuccessResult();
+        }
+
+       
     }
 }

@@ -7,7 +7,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EfEntityFramework
 {
-    public class EfModelDal:EfEntityRepositoryBase<Model,AracKiralamaContext>,IModelDal
+    public class EfCarImageDal:EfEntityRepositoryBase<CarImage,AracKiralamaContext>,ICarImageDal
     {
     }
 }

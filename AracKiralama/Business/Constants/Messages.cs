@@ -67,5 +67,21 @@ namespace Business.Constants
         public static string UserAdded = "Kullanıcı eklendi";
         public static string UserUpdated = "Kullanıcı güncellendi";
         public static string UserDeleted = "Kullanıcı silindi";
+        public static string BrandNameExistError = "Bu marka daha önce girildi";
+        public static string BankNameExistError = "Bu banka daha önce girildi";
+        public static string AccountNumberExistError = "Bu hesap numarası daha önce girildi";
+        public static string PlakaExistError = "Bu plaka daha önce girildi";
+        public static string ColorNameExistError = "Bu renk daha önce girildi";
+        public static string CreditCardNumberOfThisBankExistError = "Bu bankanın kredi kart numarası daha önce girildi";
+        public static string InvalidCreditCard = "Geçersiz kredi kartı";
+        public static string InsufficientBalance = "Kredi kartının bakiyesi yetersizdir";
+        public static string InsufficientFindexScore = "Findex puanınız yetersizdir.";
+        public static string CarImageListed = "Araç resimleri listelendi";
+        public static string CarImageDetailListed = "Seçtiğiniz araçların resim detayı listelendi";
+        public static string CarImageAdded = "Araç resmi eklendi";
+        public static string CarImageUpdated = "Araç resmi güncellendi";
+        public static string CarImageDeleted = "Araç resmi silindi";
+        public static string CarImageLimitExceded = "Araç için kullanılacak resim sayısı aşıldı";
+        public static string CarImageInvalid = "Geçersiz araç resmi";
     }
 }

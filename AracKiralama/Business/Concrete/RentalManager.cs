@@ -6,6 +6,8 @@ using System.Text;
 using Business.Abstract;
 using Business.Constants;
 using Core;
+using Core.Business;
+using Core.ExternalServices.FindexService;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -105,7 +107,13 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-           _rentalDal.Add(rental);
+            throw new NotImplementedException();
+        }
+
+        public IResult AddWithFindexScore(RentalDetailDto rental)
+        {
+            BusinessRules.Run(CheckIfFindexScore(rental.FindexScore));
+           _rentalDal.AddWithFindexScore(rental);
            return new SuccessResult(Messages.RentalAdded);
         }
 
@@ -119,6 +127,17 @@ namespace Business.Concrete
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
+        }
+
+        public IResult CheckIfFindexScore(int findexScore)
+        {
+            var FindexScore = FindFindexScore.MakeFindexScore();
+            var result = _rentalDal.GetRentalDetails(p => p.RequiredFindexScore >= findexScore).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.InsufficientFindexScore);
+            }
+            return new SuccessResult();
         }
     }
 }

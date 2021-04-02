@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Entities.Abstract;
+using Core.Entities.Concrete;
 
 namespace Entities.Concrete
 {
-    public class Model:IEntity
+    public class CooporateCustomer:User,IEntity
     {
-        public int Id { get; set; }
-        public string ModelName { get; set; }
+      public string CompanyName { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EfEntityFramework
 {
-    public class EfCustomerDal:EfEntityRepositoryBase<Customer,AracKiralamaContext>,ICustomerDal
+    public class EfCustomerDal:EfEntityRepositoryBase<CooporateCustomer,AracKiralamaContext>,ICustomerDal
     {
     }
 }

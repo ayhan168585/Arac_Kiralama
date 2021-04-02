@@ -6,3 +6,4 @@ C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\Core\obj\
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\Core\obj\Debug\netcoreapp3.1\Core.csproj.CoreCompileInputs.cache
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\Core\obj\Debug\netcoreapp3.1\Core.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\Core\obj\Debug\netcoreapp3.1\Core.pdb
+C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\Core\obj\Debug\netcoreapp3.1\Core.csprojAssemblyReference.cache

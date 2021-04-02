@@ -14,14 +14,15 @@ namespace DataAccess.Concrete.EfEntityFramework
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<Model> Models { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CooporateCustomer> CooporateCustomers { get; set; }
+        public DbSet<CooporateCustomer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
         public DbSet<CardOperation> CardOperations { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
 
 
     }

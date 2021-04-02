@@ -20,37 +20,37 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        public IDataResult<List<Customer>> GetAll(Expression<Func<Customer, bool>> filter = null)
+        public IDataResult<List<CooporateCustomer>> GetAll(Expression<Func<CooporateCustomer, bool>> filter = null)
         {
             if (DateTime.Now.Hour==22)
             {
-                return new ErrorDataResult<List<Customer>>(Messages.MaintenanceTime); 
+                return new ErrorDataResult<List<CooporateCustomer>>(Messages.MaintenanceTime); 
             }
-            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll(),Messages.CustomersListed);
+            return new SuccessDataResult<List<CooporateCustomer>>(_customerDal.GetAll(),Messages.CustomersListed);
         }
 
-        public IDataResult<Customer> GetById(int id)
+        public IDataResult<CooporateCustomer> GetById(int id)
         {
             if (DateTime.Now.Hour==22)
             {
-                return new ErrorDataResult<Customer>(Messages.MaintenanceTime);
+                return new ErrorDataResult<CooporateCustomer>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<Customer>(_customerDal.Get(p => p.Id == id),Messages.CustomerDetailListed);
+            return new SuccessDataResult<CooporateCustomer>(_customerDal.Get(p => p.Id == id),Messages.CustomerDetailListed);
         }
 
-        public IResult Add(Customer customer)
+        public IResult Add(CooporateCustomer customer)
         {
            _customerDal.Add(customer);
            return new SuccessResult(Messages.CustomerAdded);
         }
 
-        public IResult Update(Customer customer)
+        public IResult Update(CooporateCustomer customer)
         {
            _customerDal.Update(customer);
            return new SuccessResult(Messages.CustomerUpdated);
         }
 
-        public IResult Delete(Customer customer)
+        public IResult Delete(CooporateCustomer customer)
         {
             _customerDal.Delete(customer);
             return new SuccessResult(Messages.CustomerDeleted);

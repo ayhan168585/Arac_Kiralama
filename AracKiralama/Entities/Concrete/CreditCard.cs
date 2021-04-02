@@ -11,7 +11,7 @@ namespace Entities.Concrete
         public int BankId { get; set; }
         public string CreditCardNumber { get; set; }
         public string CCV { get; set; }
-        public string ValidDate { get; set; }
+        public DateTime ValidDate { get; set; }
         public decimal Deposit { get; set; }
         public string Description { get; set; }
     }

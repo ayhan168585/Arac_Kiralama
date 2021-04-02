@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -136,11 +137,11 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpPost("add")]
+        [HttpPost("addwithfindexscore")]
 
-        public IActionResult Add(Rental rental)
+        public IActionResult AddWithFindexScore(RentalDetailDto rental)
         {
-            var result = _rentalService.Add(rental);
+            var result = _rentalService.AddWithFindexScore(rental);
             if (result.Success)
             {
                 return Ok(result);

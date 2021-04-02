@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
 using Business.Constants;
 using Core;
+using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -41,6 +43,7 @@ namespace Business.Concrete
 
         public IResult Add(Bank bank)
         {
+            BusinessRules.Run(CheckIfBankNameExist(bank.BankName), CheckIfAccountNumberExist(bank.AccountNumber));
            _bankDal.Add(bank);
            return new SuccessResult(Messages.BankAdded);
 
@@ -48,6 +51,8 @@ namespace Business.Concrete
 
         public IResult Update(Bank bank)
         {
+            BusinessRules.Run(CheckIfBankNameExist(bank.BankName), CheckIfAccountNumberExist(bank.AccountNumber));
+
             _bankDal.Update(bank);
             return new SuccessResult(Messages.BankUpdated);
         }
@@ -56,6 +61,26 @@ namespace Business.Concrete
         {
            _bankDal.Delete(bank);
            return new SuccessResult(Messages.BankDeleted);
+        }
+
+        private IResult CheckIfBankNameExist(string bankName)
+        {
+            var result = _bankDal.GetAll(p => p.BankName == bankName).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.BankNameExistError);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfAccountNumberExist(string accountNumber)
+        {
+            var result = _bankDal.GetAll(p => p.AccountNumber == accountNumber).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.AccountNumberExistError);
+            }
+            return new SuccessResult();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Business.Abstract
         IDataResult<List<RentalDetailDto>> GetRentalsByCustomerId(int customerId);
         IDataResult<Rental> GetById(int id);
         IResult Add(Rental rental);
+        IResult AddWithFindexScore(RentalDetailDto rental);
         IResult Update(Rental rental);
         IResult Delete(Rental rental);
     }

@@ -6,6 +6,7 @@ using System.Text;
 using Business.Abstract;
 using Business.Constants;
 using Core;
+using Core.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -46,16 +47,16 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<CarDetailDto>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetails(p => p.CarId == carId).SingleOrDefault(),Messages.CarDetailListed);
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetails().Where(p=>p.CarId==carId).SingleOrDefault(),Messages.CarDetailListed);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             if (DateTime.Now.Hour == 22)
             {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(p => p.BrandId == brandId),Messages.CarsListedByBrand);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == brandId),Messages.CarsListedByBrand);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
@@ -78,12 +79,14 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
+            BusinessRules.Run(CheckIfPlakaExist(car.Plaka));
            _carDal.Add(car);
            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Update(Car car)
         {
+            BusinessRules.Run(CheckIfPlakaExist(car.Plaka));
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
@@ -92,6 +95,16 @@ namespace Business.Concrete
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
+        }
+
+        public IResult CheckIfPlakaExist(string plaka)
+        {
+            var result = _carDal.GetAll(p => p.Plaka == plaka).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.PlakaExistError);
+            }
+            return new SuccessResult();
         }
     }
 }
