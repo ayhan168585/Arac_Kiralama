@@ -1,0 +1,15 @@
+<div *ngIf="dataLoaded==false" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="row">
+    <div  *ngFor="let car of carDetails" class="card" class="carBox" style="width: 18rem;">
+      <img *ngFor="let image of carimages"style="width: 250px;height: 150px;"  src="{{image.imagePath}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{car.carName}}</h5>
+        <h5 class="card-title">Model : {{car.modelYear}}</h5>
+        <h5 class="card-title"> Günlük Kira: {{car.dailyPrice}}</h5>
+        <p class="card-text">{{car.description}}</p>
+        <a class="btn btn-primary" routerLink="/cars/cardetail/{{car.carId}}">İncele</a>
+      </div>
+    </div>
+  </div>

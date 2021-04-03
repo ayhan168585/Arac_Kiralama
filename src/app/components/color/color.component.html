@@ -1,0 +1,17 @@
+<h6
+class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
+>
+
+<a class="link-secondary" routerLink="/cars" aria-label="Add a new report">
+  <span data-feather="plus-circle">Tüm Renkler</span>
+</a>
+</h6>
+<ul class="nav flex-column mb-2">
+<li *ngFor="let color of colors" class="nav-item">
+  <a (click)="setCurrentColor(color)"class="nav-link" routerLink="/cars/color/{{color.id}}">
+    <span data-feather="file-text"></span>
+    {{color.colorName}}
+  </a>
+</li>
+
+</ul>

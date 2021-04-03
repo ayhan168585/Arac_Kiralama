@@ -1,0 +1,18 @@
+<h2>Araç Detayı</h2>
+<div *ngIf="dataLoaded == false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+
+<div class="row">
+  <div  *ngFor="let car of carDetails" class="card" class="carBox" style="width: 18rem;">
+    <img style="width: 250px;height: 150px;"  [src]="car.imagePath" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{car.carName}}</h5>
+      <h5 class="card-title">Model : {{car.modelYear}}</h5>
+      <h5 class="card-title"> KDV'li Günlük Kira: {{car.dailyPrice | vatAdded :18 | currency :"TRY":"TL"}}</h5>
+      <p class="card-text">{{car.description}}</p>
+      <a class="btn btn-success" routerLink="/cars/cardetail/{{car.carId}}">Ödeme Sayfasına Git</a>
+    </div>
+  </div>
+</div>
