@@ -41,7 +41,7 @@ namespace DataAccess.Concrete.EfEntityFramework
                                  Id = rental.Id,
                                  UserId = user.Id,
                                  CarId = car.Id,
-                                 RequiredFindexScore = rental.RequiredFindexScore,
+                                 RequiredFindexScore = car.RequiredFindexScore,
                                  BrandId = brand.Id,
                                  ColorId = color.Id,
                                  BankId = bank.Id,

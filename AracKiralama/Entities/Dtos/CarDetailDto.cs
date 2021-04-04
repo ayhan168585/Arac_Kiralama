@@ -19,6 +19,7 @@ namespace Entities.Dtos
         public string CarName { get; set; }
         public string ColorName { get; set; }
         public string Plaka { get; set; }
+        public int RequiredFindexScore { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
     }

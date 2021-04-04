@@ -21,6 +21,9 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.Plaka).NotEmpty();
             RuleFor(p => p.Plaka).MinimumLength(2);
             RuleFor(p => p.Plaka).MaximumLength(20);
+            RuleFor(p => p.RequiredFindexScore).NotEmpty();
+            RuleFor(p => p.RequiredFindexScore).LessThanOrEqualTo(0);
+            RuleFor(p => p.RequiredFindexScore).GreaterThanOrEqualTo(1900);
             RuleFor(p => p.Description).NotEmpty();
             RuleFor(p => p.Description).MinimumLength(2);
             RuleFor(p => p.Description).MaximumLength(200);

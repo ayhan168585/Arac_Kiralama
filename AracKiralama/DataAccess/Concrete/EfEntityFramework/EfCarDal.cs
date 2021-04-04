@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EfEntityFramework
 {
     public class EfCarDal:EfEntityRepositoryBase<Car,AracKiralamaContext>,ICarDal
     {
-        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
+        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (AracKiralamaContext context=new AracKiralamaContext())
             {
@@ -35,6 +35,7 @@ namespace DataAccess.Concrete.EfEntityFramework
                         DailyPrice = car.DailyPrice,
                         ColorName = color.ColorName,
                         Plaka = car.Plaka,
+                        RequiredFindexScore = car.RequiredFindexScore,
                         ImagePath = image.ImagePath,
                         Description = car.Description
 

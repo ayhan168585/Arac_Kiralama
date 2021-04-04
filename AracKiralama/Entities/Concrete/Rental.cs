@@ -11,7 +11,6 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int UserId { get; set; }
         public int CarId { get; set; }
-        public int RequiredFindexScore { get; set; }
         public int CreditCardId { get; set; }
         public decimal RentPrice { get; set; }
         public DateTime RentDate { get; set; }

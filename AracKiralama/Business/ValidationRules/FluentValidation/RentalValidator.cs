@@ -11,9 +11,6 @@ namespace Business.ValidationRules.FluentValidation
         public RentalValidator()
         {
             RuleFor(p => p.CreditCardId).NotEmpty();
-            RuleFor(p => p.RequiredFindexScore).NotEmpty();
-            RuleFor(p => p.RequiredFindexScore).LessThanOrEqualTo(0);
-            RuleFor(p => p.RequiredFindexScore).GreaterThanOrEqualTo(1900);
             RuleFor(p => p.CarId).NotEmpty();
             RuleFor(p => p.UserId).NotEmpty();
             RuleFor(p => p.RentDate).NotEmpty();
