@@ -1,0 +1,25 @@
+export interface RentalDetail{
+    id:number;
+    userId:number;
+    customerId:number;
+    carId:number;
+    requiredFindexScore:number;
+    brandId:number;
+    colorId:number;
+    bankId:number;
+    creditCardId:number;
+    cardOperationId:number;
+    tcNo:string;
+    firstName:string;
+    lastName:string;
+    companyName:string;
+    carName:string;
+    brandName:string;
+    colorName:string;
+    bankName:string;
+    creditCardNumber:string;
+    findexScore:number;
+    operationName:string;
+    rentPrice:number;
+    description:string;
+}

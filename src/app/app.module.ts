@@ -19,7 +19,9 @@ import { ColorComponent } from './components/color/color.component'
 import{ToastrModule} from "ngx-toastr";
 import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
 import { ColorAddComponent } from './components/color/color-add/color-add.component';
-import { CarAddComponent } from './components/car/car-add/car-add.component'
+import { CarAddComponent } from './components/car/car-add/car-add.component';
+import { RentalComponent } from './components/rental/rental.component';
+import { RentalAddComponent } from './components/rental/rental-add/rental-add.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { CarAddComponent } from './components/car/car-add/car-add.component'
     BrandAddComponent,
     ColorAddComponent,
     CarAddComponent,
+    RentalComponent,
+    RentalAddComponent,
   ],
   imports: [
     BrowserModule,
