@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms'
+import {FormsModule,ReactiveFormsModule} from '@angular/forms'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,11 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 import { CarFilterComponent } from './components/car-filter/car-filter.component';
 import { ColorComponent } from './components/color/color.component'
 
+import{ToastrModule} from "ngx-toastr";
+import { BrandAddComponent } from './components/brand/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color/color-add/color-add.component';
+import { CarAddComponent } from './components/car/car-add/car-add.component'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,12 +33,20 @@ import { ColorComponent } from './components/color/color.component'
     FilterPipePipe,
     CarFilterComponent,
     ColorComponent,
+    BrandAddComponent,
+    ColorAddComponent,
+    CarAddComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-center-center"
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/Models/car';
 import { CarDetail } from 'src/app/Models/carDetail';
 import { CarDetailService } from 'src/app/services/car-detail.service';
@@ -18,6 +19,7 @@ export class CarDetailComponent implements OnInit {
   constructor(
     private carService: CarService,
     private carDetailService:CarDetailService,
+    private toastrService:ToastrService,
     private activatedRoute: ActivatedRoute
   ) {}
 
@@ -46,5 +48,9 @@ export class CarDetailComponent implements OnInit {
       this.carDetails = response.data;
       this.dataLoaded=true
     });
+  }
+
+  goPaymentPage(car:CarDetail){
+    this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz....")
   }
 }

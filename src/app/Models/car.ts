@@ -6,6 +6,6 @@ export interface Car{
     modelYear:number;
     dailyPrice:number;
     plaka:string;
-    imagePath:string;
+    requiredFindexScore:number;
     description:string;
 }

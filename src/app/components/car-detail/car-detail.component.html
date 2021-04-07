@@ -9,10 +9,12 @@
     <img style="width: 250px;height: 150px;"  [src]="car.imagePath" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{car.carName}}</h5>
+      <h5 class="card-title">Renk:{{car.colorName}}</h5>
       <h5 class="card-title">Model : {{car.modelYear}}</h5>
       <h5 class="card-title"> KDV'li Günlük Kira: {{car.dailyPrice | vatAdded :18 | currency :"TRY":"TL"}}</h5>
+      <h5 class="card-title">Findex Puanı: {{car.requiredFindexScore}}</h5>
       <p class="card-text">{{car.description}}</p>
-      <a class="btn btn-success" routerLink="/cars/cardetail/{{car.carId}}">Ödeme Sayfasına Git</a>
+      <a (click)="goPaymentPage(car)" class="btn btn-success" routerLink="/cars/cardetail/{{car.carId}}">Kirala</a>
     </div>
   </div>
 </div>

@@ -8,6 +8,7 @@ export interface CarDetail{
     colorName:string;
     carName:string;
     plaka:string;
+    requiredFindexScore:number;
     imagePath:string;
     description:string;
 }
