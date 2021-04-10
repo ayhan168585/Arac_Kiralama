@@ -7,6 +7,8 @@ import { BrandAddComponent } from './components/brand/brand-add/brand-add.compon
 import { ColorAddComponent } from './components/color/color-add/color-add.component';
 import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { RentalAddComponent } from './components/rental/rental-add/rental-add.component';
+import { RentalComponent } from './components/rental/rental.component';
+import { UserAddComponent } from './components/user/user-add/user-add.component';
 
 const routes: Routes = [
   {path:"",component:CarComponent,pathMatch:"full"},
@@ -19,7 +21,10 @@ const routes: Routes = [
   {path:"cars/brand-add",component:BrandAddComponent},
   {path:"cars/color-add",component:ColorAddComponent},
   {path:"cars/car-add",component:CarAddComponent},
-  {path:"cars/rental-add",component:RentalAddComponent}
+  {path:"cars/rental-add/:carId",component:RentalAddComponent},
+  {path:"cars/rentals",component:RentalComponent},
+  {path:"cars/rentals/:carId",component:RentalComponent},
+  {path:"cars/user-add",component:UserAddComponent}
 
   
 ];

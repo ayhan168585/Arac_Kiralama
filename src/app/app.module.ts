@@ -21,7 +21,10 @@ import { BrandAddComponent } from './components/brand/brand-add/brand-add.compon
 import { ColorAddComponent } from './components/color/color-add/color-add.component';
 import { CarAddComponent } from './components/car/car-add/car-add.component';
 import { RentalComponent } from './components/rental/rental.component';
-import { RentalAddComponent } from './components/rental/rental-add/rental-add.component'
+import { RentalAddComponent } from './components/rental/rental-add/rental-add.component';
+import { UserComponent } from './components/user/user.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { UserAddComponent } from './components/user/user-add/user-add.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { RentalAddComponent } from './components/rental/rental-add/rental-add.co
     CarAddComponent,
     RentalComponent,
     RentalAddComponent,
+    UserComponent,
+    CustomerComponent,
+    UserAddComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,48 @@
+<h2>Müşteri Bilgileri</h2>
+<form [formGroup]="userAddForm" class="mb-3">
+  <div class="mb-3">
+    <label class="form-label" for="firstName">Müşteri Adı</label>
+    <div class="mb-3">
+      <input
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        class="form-control"
+        placeholder="Müşteri adı giriniz"
+        name="firstName"
+      />
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form*control" for="lastName">Müşteri Soyadı</label>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        formControlName="lastName"
+        id="lastName"
+        name="lastName"
+        type="text"
+        placeholder="Soyadı giriniz"
+      />
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form*control" for="email">Email</label>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        formControlName="email"
+        id="email"
+        name="email"
+        type="text"
+        placeholder="Email giriniz"
+      />
+    </div>
+  </div>
+  <br />
+  <div class="mb-3">
+    <button class="btn btn-fill btn-success" (click)="userAdd()">
+      Müşteri Kaydet
+    </button>
+  </div>
+</form>

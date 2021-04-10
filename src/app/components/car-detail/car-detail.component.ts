@@ -51,6 +51,11 @@ export class CarDetailComponent implements OnInit {
   }
 
   goPaymentPage(car:CarDetail){
-    this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz....")
+    this.carDetailService.getCarById(car.carId).subscribe(response=>{
+      this.carDetails=response.data
+     
+      this.toastrService.info("Ödeme sayfasına yönlendiriliyorsunuz....")
+    })
+   
   }
 }

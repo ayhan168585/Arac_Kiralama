@@ -1,1 +1,303 @@
-<p>rental-add works!</p>
+<h2>Müşteri Bilgileri</h2>
+<form [formGroup]="userAddForm">
+  <label class="form*control">Müşteri Adı</label>
+  <input
+    class="form-control"
+    for="firstName"
+    formControlName="firstName"
+    id="firstName"
+    name="firstName"
+    type="text"
+    placeholder="Müşteri adı giriniz"
+  />
+  <label class="form*control" for="lastName">Müşteri Soyadı</label>
+  <input
+    class="form-control"
+    formControlName="lastName"
+    id="lastName"
+    name="lastName"
+    type="text"
+    placeholder="Soyadı giriniz"
+  />
+  <label class="form*control" for="email">Email</label>
+  <input
+    class="form-control"
+    formControlName="email"
+    id="email"
+    name="email"
+    type="text"
+    placeholder="Email giriniz"
+  />
+
+  <br />
+  <div class="mb-3">
+    <button class="btn btn-fill btn-success" (click)="addUser()">
+      Müşteri Kaydet
+    </button>
+  </div>
+</form>
+<h2>Firma Bilgileri</h2>
+<form [formGroup]="customerAddForm">
+  <div class="mb-3">
+    <label class="form-label" for="userId">Müşteri Adı</label>
+    <div class="mb-3">
+      <select
+        required
+        id="userId"
+        formControlName="userId"
+        class="form-control"
+        name="userId"
+      >
+        <option *ngFor="let user of users" [ngValue]="user.id">
+          {{ user.firstName }} {{ user.lastName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <label class="form*control" for="companyName">Firma Adı</label>
+  <input
+    class="form-control"
+    formControlName="companyName"
+    id="companyName"
+    name="companyName"
+    type="text"
+    placeholder="Firma giriniz"
+  />
+  <br />
+  <div class="mb-3">
+    <button class="btn btn-fill btn-success" (click)="addCustomer()">
+      Firma Kaydet
+    </button>
+  </div>
+</form>
+
+<h2>Ödeme Bilgileri</h2>
+<form [formGroup]="creditCardAddForm">
+  <div class="mb-3">
+    <label class="form-label" for="bankId">Banka Adı</label>
+    <div class="mb-3">
+      <select
+        required
+        id="bankId"
+        formControlName="bankId"
+        class="form-control"
+        name="bankId"
+      >
+        <option *ngFor="let bank of banks" [ngValue]="bank.id">
+          {{ bank.bankName }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <div class="md-form md-outline my-2">
+        <select
+          required
+          id="userId"
+          formControlName="userId"
+          class="form-control"
+          name="userId"
+        >
+          <option *ngFor="let user of users" [ngValue]="user.id">
+            {{ user.firstName | uppercase }} {{ user.lastName | uppercase }}
+          </option>
+        </select>
+      </div>
+      <div class="invalid-feedback">Ad Soyad girilmesi zorunludur.</div>
+    </div>
+    <div class="col-md-6 mb-2">
+      <div class="md-form md-outline my-2">
+        <input
+          type="text"
+          id="creditCardNumber"
+          formControlName="creditCardNumber"
+          name="creditCardNumber"
+          class="form-control"
+          required
+        />
+        <label for="creditCardNumber">Kredi kart numarası</label>
+      </div>
+      <div class="invalid-feedback">Kredi kartı numarası gereklidir.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 mb-2">
+      <div class="md-form md-outline my-2">
+        <input type="text" 
+        id="ccv" 
+        formControlName="ccv"
+        name="ccv"
+        class="form-control" 
+        required />
+        <label for="ccv">CCV</label>
+      </div>
+      <div class="invalid-feedback">Güvenlik kodu girmek zorunludur.</div>
+    </div>
+    <div class="col-md-9 mb-2">
+      <div class="md-form md-outline my-2">
+        <input type="text" 
+        id="description" 
+        formControlName="description"
+        name="description"
+        class="form-control" 
+        required />
+        <label for="description">Açıklama</label>
+      </div>
+      <div class="invalid-feedback">Açıklama girmek zorunludur.</div>
+    </div>
+  </div>
+  <hr class="mb-4" />
+  <button class="btn btn-fill btn-success" (click)="addCreditCard()">
+    Kredi Kartı Kaydet
+  </button>
+</form>
+
+
+<h2>Seçilen Araç Bilgileri</h2>
+<form [formGroup]="rentalAddForm">
+  <label class="form-control">Araç adı</label>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="{{ carName }}"
+    aria-label="Disabled input example"
+    disabled
+    readonly
+  />
+  <label class="form*control">Araç markası</label>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="{{ carBrandName }}"
+    aria-label="Disabled input example"
+    disabled
+    readonly
+  />
+  <label class="form*control">Renk</label>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="{{ carColorName }}"
+    aria-label="Disabled input example"
+    disabled
+    readonly
+  />
+  <label class="form*control">KDV'li günlük kira bedeli</label>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="KDV'li Günlük Kira: {{ carDailyPrice | vatAdded: 18 }} TL"
+    aria-label="Disabled input example"
+    disabled
+    readonly
+  />
+  <label class="form*control">Findex puanı</label>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="Findex Puanı: {{ carFindexScore }}"
+    aria-label="Disabled input example"
+    disabled
+    readonly
+  />
+</form>
+
+<h2>Kiralama Bölümü</h2>
+<form [formGroup]="rentalAddForm">
+
+  <div class="mb-3">
+    <label class="form-label" for="userId">Müşteri Adı</label>
+    <div class="mb-3">
+      <select
+        required
+        id="userId"
+        formControlName="userId"
+        class="form-control"
+        name="userId"
+      >
+        <option *ngFor="let user of users" [ngValue]="user.id">
+          {{ user.firstName }} {{ user.lastName }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="carId">Araç Adı</label>
+    <div class="mb-3">
+      <select
+        required
+        id="carId"
+        formControlName="carId"
+        class="form-control"
+        name="carId"
+      >
+        <option *ngFor="let car of cars" [ngValue]="car.id">
+          {{car.carName}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="creditCardId">Kredi Kartı Numarası</label>
+    <div class="mb-3">
+      <select
+        required
+        id="creditCardId"
+        formControlName="creditCardId"
+        class="form-control"
+        name="creditCardId"
+      >
+        <option *ngFor="let creditcard of creditcards" [ngValue]="creditcard.id">
+          {{creditcard.creditCardNumber}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <label class="form*control" for="rentDate">Kiralama Tarihi</label>
+  <input
+    class="form-control"
+      type="date"
+      formControlName="rentDate"
+      id="rentDate"
+      name="rentDate"
+    placeholder="Kiralama tarihi giriniz"
+  
+  />
+  <label class="form*control" for="returnDate">Dönüş Tarihi</label>
+  <input
+    class="form-control"
+    formControlName="returnDate"
+    id="returnDate"
+    name="returnDate"
+    type="date"
+    placeholder="Dönüş tarihi giriniz"
+  />
+  <label class="form*control">KDV'li günlük kira bedeli</label>
+  <input
+    class="form-control"
+    formControlName="rentPrice"
+    id="rentPrice"
+    name="rentPrice"
+    type="number"
+    placeholder="KDV'li Günlük Kira: {{ carDailyPrice | vatAdded: 18 }} TL"
+    aria-label="Disabled input example"
+   
+  />
+  <label class="form*control" for="description">Açıklama</label>
+  <input
+    class="form-control"
+    formControlName="description"
+    id="description"
+    name="description"
+    type="text"
+    placeholder="Açıklama giriniz"
+  />
+  <br>
+  <button class="btn btn-fill btn-success" (click)="addRental()">
+   Kirala
+  </button>
+ 
+  
+</form>

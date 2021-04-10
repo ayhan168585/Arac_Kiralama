@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { RentalDetail } from 'src/app/Models/rentalDetail';
+import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
   selector: 'app-rental',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RentalComponent implements OnInit {
 
-  constructor() { }
+  rentalDetails:RentalDetail[]=[];
+
+  constructor(private rentalService:RentalService,private toastrService:ToastrService ) { }
 
   ngOnInit(): void {
+    this.GetRentalDetail()
+  }
+
+  GetRentalDetail(){
+    this.rentalService.GetRentalDetail().subscribe(response=>{
+      this.rentalDetails=response.data
+      this.toastrService.info(response.message,"Başarılı")
+    })
   }
 
 }

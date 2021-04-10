@@ -1,1 +1,24 @@
-<p>rental works!</p>
+<table class="table table-success table-striped">
+    <thead>
+        <th>Adı Soyadı</th>
+        <th>Firma Adı</th>
+        <th>Araç Adı</th>
+        <th>Marka</th>
+        <th>Renk</th>
+        <th>Kiralama Tarihi</th>
+        <th>Dönüş tarihi</th>
+        <th>Toplam Fiyat</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rentaldetail of rentalDetails">
+            <td>{{rentaldetail.firstName}} {{rentaldetail.lastName}}</td>
+            <td>{{rentaldetail.companyName}}</td>
+            <td>{{rentaldetail.carName}}</td>
+            <td>{{rentaldetail.brandName}}</td>
+            <td>{{rentaldetail.colorName}}</td>
+            <td>{{rentaldetail.rentDate | date:"longDate"}}</td>
+            <td>{{rentaldetail.returnDate | date:"longDate"}}</td>
+            <td>{{rentaldetail.totalPrice | vatAdded :18 | currency :"TRY":"TL"}}</td>
+        </tr>
+    </tbody>
+  </table>
