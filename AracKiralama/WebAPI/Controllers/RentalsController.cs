@@ -85,18 +85,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("getrentalsbymodelid")]
-
-        public IActionResult GetRentalsByModelId(int modelId)
-        {
-            var result = _rentalService.GetRentalsByModelId(modelId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.Message);
-        }
+       
 
         [HttpGet("getrentalsbyuserid")]
 
@@ -142,6 +131,19 @@ namespace WebAPI.Controllers
         public IActionResult AddWithFindexScore(RentalDetailDto rental)
         {
             var result = _rentalService.AddWithFindexScore(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("add")]
+
+        public IActionResult Add(Rental rental)
+        {
+            var result = _rentalService.Add(rental);
             if (result.Success)
             {
                 return Ok(result);

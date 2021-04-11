@@ -14,22 +14,23 @@ namespace Entities.Dtos
         public int CarId { get; set; }
         public int RequiredFindexScore { get; set; }
         public int BrandId { get; set; }
-        public int ModelId { get; set; }
         public int ColorId { get; set; }
         public int BankId { get; set; }
         public int CreditCardId { get; set; }
+        public decimal Deposit { get; set; }
         public int CardOperationId { get; set; }
-        public string TcNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public string CarName { get; set; }
         public string BrandName { get; set; }
-        public string ModelName { get; set; }
         public string ColorName { get; set; }
         public string BankName { get; set; }
         public string CreditCardNumber { get; set; }
         public int FindexScore { get; set; }
+        public DateTime RentDate { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public decimal TotalPrice { get; set; }
         public string OperationName { get; set; }
         public decimal RentPrice { get; set; }
         public string Description { get; set; }

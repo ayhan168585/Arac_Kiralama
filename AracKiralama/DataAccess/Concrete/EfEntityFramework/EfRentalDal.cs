@@ -21,20 +21,17 @@ namespace DataAccess.Concrete.EfEntityFramework
                 var result = from rental in context.Rentals
                              join user in context.Users
                                  on rental.UserId equals user.Id
-                             join coop in context.CooporateCustomers
-                                 on user.Id equals coop.Id
                              join car in context.Cars
                                   on rental.CarId equals car.Id
+                             join customer in context.Customers
+                                 on rental.CustomerId equals customer.Id
                              join brand in context.Brands
-                                 on car.BrandId equals brand.Id
-                           join color in context.Colors
-                                 on car.ColorId equals color.Id
+                                 on rental.BrandId equals brand.Id
+                             join color in context.Colors
+                                   on rental.ColorId equals color.Id
                              join credit in context.CreditCards
                                  on rental.CreditCardId equals credit.Id
-                             join bank in context.Banks
-                                 on credit.BankId equals bank.Id
-                             join operation in context.CardOperations
-                                 on credit.Id equals operation.CreditCardId
+                            
 
                              select new RentalDetailDto()
                              {
@@ -44,21 +41,19 @@ namespace DataAccess.Concrete.EfEntityFramework
                                  RequiredFindexScore = car.RequiredFindexScore,
                                  BrandId = brand.Id,
                                  ColorId = color.Id,
-                                 BankId = bank.Id,
                                  CreditCardId = credit.Id,
-                                 CardOperationId = operation.Id,
+                                 Deposit = credit.Deposit,
                                  CarName = car.CarName,
                                  BrandName = brand.BrandName,
                                  ColorName = color.ColorName,
                                  FirstName = user.FirstName,
                                  LastName = user.LastName,
-                                 CompanyName = coop.CompanyName,
-                                 TcNo = user.TcNo,
-                                 FindexScore = user.FindexScore,
-                                 BankName = bank.BankName,
+                                 CompanyName = customer.CompanyName,
                                  CreditCardNumber = credit.CreditCardNumber,
-                                 OperationName = operation.OperationName,
                                  RentPrice = rental.RentPrice,
+                                 RentDate = rental.RentDate,
+                                 ReturnDate = rental.ReturnDate,
+                                 TotalPrice = rental.TotalPrice,
                                  Description = rental.Description
 
 
@@ -71,7 +66,7 @@ namespace DataAccess.Concrete.EfEntityFramework
 
         public void AddWithFindexScore(RentalDetailDto rental)
         {
-            using (AracKiralamaContext context=new AracKiralamaContext())
+            using (AracKiralamaContext context = new AracKiralamaContext())
             {
                 var addedEntity = context.Entry(rental);
                 addedEntity.State = EntityState.Added;

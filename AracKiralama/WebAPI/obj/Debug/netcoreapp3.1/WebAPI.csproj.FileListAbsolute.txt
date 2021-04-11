@@ -11,6 +11,7 @@ C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bi
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Autofac.Extras.DynamicProxy.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Ayhan Özer\Desktop\Araç Kiralama\Arac_Kiralama\AracKiralama\WebAPI\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll

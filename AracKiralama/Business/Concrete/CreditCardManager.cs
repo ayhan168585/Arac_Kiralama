@@ -7,6 +7,7 @@ using Business.Abstract;
 using Business.Constants;
 using Core;
 using Core.Business;
+using Core.ExternalServices.CreditCardDeposit;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -71,6 +72,9 @@ namespace Business.Concrete
         public IResult Add(CreditCard card)
         {
             BusinessRules.Run(CheckIfCreditCardNumberOfBankExist(card.BankId, card.CreditCardNumber),CheckIfCreditCardValid());
+
+            card.Deposit = CreditCardDeposit.MakeDeposit();
+            card.ValidDate = DateTime.Now.AddYears(3);
 
            _creditCardDal.Add(card);
            return new SuccessResult(Messages.CreditCardAdded);

@@ -69,14 +69,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.BrandId == brandId),Messages.RentalsListedByBrand);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalsByModelId(int modelId)
-        {
-            if (DateTime.Now.Hour == 22)
-            {
-                return new ErrorDataResult<List<RentalDetailDto>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(p => p.ModelId == modelId),Messages.RentalsListedByModel);
-        }
+      
 
         public IDataResult<List<RentalDetailDto>> GetRentalsByUserId(int userId)
         {
@@ -107,13 +100,20 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            throw new NotImplementedException();
+            var price = Convert.ToDecimal(rental.RentPrice);
+            TimeSpan days = (rental.ReturnDate - rental.RentDate);
+            rental.TotalPrice = price * Convert.ToInt32(days.TotalDays);
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult AddWithFindexScore(RentalDetailDto rental)
         {
-            BusinessRules.Run(CheckIfFindexScore(rental.FindexScore));
-           _rentalDal.AddWithFindexScore(rental);
+            BusinessRules.Run(CheckIfFindexScore(rental.FindexScore),CheckIfCreditCardDeposit(rental.Deposit));
+                        var price = Convert.ToDecimal(rental.RentPrice);
+            TimeSpan days = (rental.ReturnDate - rental.RentDate);
+            rental.TotalPrice = price * Convert.ToInt32(days.TotalDays);
+            _rentalDal.AddWithFindexScore(rental);
            return new SuccessResult(Messages.RentalAdded);
         }
 
@@ -137,6 +137,17 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.InsufficientFindexScore);
             }
+            return new SuccessResult();
+        }
+
+        public IResult CheckIfCreditCardDeposit(decimal deposit)
+        {
+            var result = _rentalDal.GetRentalDetails(p => p.TotalPrice < deposit).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.InsufficientBalance);
+            }
+
             return new SuccessResult();
         }
     }

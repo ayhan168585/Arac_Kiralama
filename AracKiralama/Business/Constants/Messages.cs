@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 
 namespace Business.Constants
@@ -83,5 +84,15 @@ namespace Business.Constants
         public static string CarImageDeleted = "Araç resmi silindi";
         public static string CarImageLimitExceded = "Araç için kullanılacak resim sayısı aşıldı";
         public static string CarImageInvalid = "Geçersiz araç resmi";
+        public static string AuthorizationDenied = "Bu işlem için yetkiniz yok";
+        public static string ClaimsListed = "Kullanıcı yetkileri listelendi";
+        public static string UserDetailListedByMail = "Seçtiğiniz Mail için kullanıcı detayları listelendi";
+        public static string UserRegistered = "Kullanıcı kaydedildi";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
+        public static string AccessTokenCreated = "Giriş yapıldı";
+        public static string UserOperationClaimsListed = "Kullanıcı yetkileri listelendi";
     }
 }

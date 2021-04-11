@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core;
 using Core.Business;
@@ -87,6 +88,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(p=>p.Id==id),Messages.CarDetailListed);
         }
 
+        [SecuredOperation("car.add,admin")]
         public IResult Add(Car car)
         {
             BusinessRules.Run(CheckIfPlakaExist(car.Plaka));

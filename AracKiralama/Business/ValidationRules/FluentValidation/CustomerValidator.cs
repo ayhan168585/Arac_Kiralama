@@ -6,9 +6,9 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class CooperateCustomerValidator:AbstractValidator<CooporateCustomer>
+    public class CustomerValidator : AbstractValidator<Customer>
     {
-        public CooperateCustomerValidator()
+        public CustomerValidator()
         {
             RuleFor(p => p.CompanyName).NotEmpty();
             RuleFor(p => p.CompanyName).MinimumLength(2);

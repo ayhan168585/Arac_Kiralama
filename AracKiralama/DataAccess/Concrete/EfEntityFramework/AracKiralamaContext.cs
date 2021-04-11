@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EfEntityFramework
 {
-    public class AracKiralamaContext:DbContext
+    public class AracKiralamaContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,8 +16,9 @@ namespace DataAccess.Concrete.EfEntityFramework
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<CooporateCustomer> CooporateCustomers { get; set; }
-        public DbSet<CooporateCustomer> Customers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }

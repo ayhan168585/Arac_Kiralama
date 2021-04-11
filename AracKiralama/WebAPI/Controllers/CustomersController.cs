@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
@@ -21,7 +20,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getall")]
-
         public IActionResult GetAll()
         {
             var result = _customerService.GetAll();
@@ -34,7 +32,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-
         public IActionResult GetById(int id)
         {
             var result = _customerService.GetById(id);
@@ -47,8 +44,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-
-        public IActionResult Add(CooporateCustomer customer)
+        public IActionResult Add(Customer customer)
         {
             var result = _customerService.Add(customer);
             if (result.Success)
@@ -58,10 +54,8 @@ namespace WebAPI.Controllers
 
             return BadRequest(result.Message);
         }
-
         [HttpPost("update")]
-
-        public IActionResult Update(CooporateCustomer customer)
+        public IActionResult Update(Customer customer)
         {
             var result = _customerService.Update(customer);
             if (result.Success)
@@ -71,10 +65,8 @@ namespace WebAPI.Controllers
 
             return BadRequest(result.Message);
         }
-
         [HttpPost("delete")]
-
-        public IActionResult Delete(CooporateCustomer customer)
+        public IActionResult Delete(Customer customer)
         {
             var result = _customerService.Delete(customer);
             if (result.Success)

@@ -3,57 +3,51 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core;
+using Core.Aspects.Autofac.Validation;
 using Core.Entities.Concrete;
+using Core.ExternalServices.FindexService;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
-    public class UserManager:IUserService
+    public class UserManager : IUserService
     {
-        private IUserDal _userDal;
+        IUserDal _userDal;
 
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
         }
 
-        public IDataResult<List<User>> GetAll(Expression<Func<User, bool>> filter = null)
-        {
-            if (DateTime.Now.Hour==22)
-            {
-                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            }
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UsersListed);
-        }
-
-        public IDataResult<User> GetById(int id)
+       // [CacheAspect]
+        //[SecuredOperation("admin")]
+        public IDataResult<List<User>> GetAll()
         {
             if (DateTime.Now.Hour == 22)
             {
-                return new ErrorDataResult<User>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<User>(_userDal.Get(p => p.Id == id),Messages.UserDetailListed);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
+        }
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
         }
 
         public IResult Add(User user)
         {
-           _userDal.Add(user);
-           return new SuccessResult(Messages.UserAdded);
+            _userDal.Add(user);
+            return new SuccessResult(Messages.UserAdded);
         }
 
-        public IResult Update(User user)
+        public User GetByMail(string email)
         {
-            _userDal.Update(user);
-            return new SuccessResult(Messages.UserUpdated);
-        }
-
-        public IResult Delete(User user)
-        {
-           _userDal.Delete(user);
-           return new SuccessResult(Messages.UserDeleted);
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }

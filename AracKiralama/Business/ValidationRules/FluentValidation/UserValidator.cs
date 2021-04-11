@@ -10,12 +10,8 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(p => p.TcNo).NotEmpty();
-            RuleFor(p => p.TcNo).MinimumLength(2);
-            RuleFor(p => p.TcNo).MaximumLength(20);
-            RuleFor(p => p.FindexScore).NotEmpty();
-            RuleFor(p => p.FindexScore).LessThanOrEqualTo(0);
-            RuleFor(p => p.FindexScore).GreaterThanOrEqualTo(1900);
+         
+         
             RuleFor(p => p.FirstName).NotEmpty();
             RuleFor(p => p.FirstName).MinimumLength(2);
             RuleFor(p => p.FirstName).MaximumLength(50);
@@ -25,9 +21,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.Email).NotEmpty();
             RuleFor(p => p.Email).MinimumLength(2);
             RuleFor(p => p.Email).MaximumLength(50);
-            RuleFor(p => p.Password).NotEmpty();
-            RuleFor(p => p.Password).MinimumLength(2);
-            RuleFor(p => p.Password).MaximumLength(50);
+          
         }
     }
 }
