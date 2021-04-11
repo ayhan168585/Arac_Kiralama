@@ -94,6 +94,9 @@ export class RentalAddComponent implements OnInit {
   createRentalAddForm() {
     this.rentalAddForm = this.formBuilder.group({
       userId: ['', Validators.required],
+      customerId:["",Validators.required],
+      brandId:["",Validators.required],
+      colorId:["",Validators.required],
       carId: ['', Validators.required],
       creditCardId:["",Validators.required],
       rentPrice:["",Validators.required],

@@ -18,7 +18,7 @@
             <td>{{rentaldetail.colorName}}</td>
             <td>{{rentaldetail.rentDate | date:"longDate"}}</td>
             <td>{{rentaldetail.returnDate | date:"longDate"}}</td>
-            <td>{{rentaldetail.totalPrice | vatAdded :18 | currency :"TRY":"TL"}}</td>
+            <td>{{rentaldetail.totalPrice | currency :"TRY":"TL"}}</td>
         </tr>
     </tbody>
   </table>

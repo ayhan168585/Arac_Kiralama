@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { CarComponent } from './components/car/car.component';
 import { NavComponent } from './components/nav/nav.component';
 import { BrandComponent } from './components/brand/brand.component';
-import{ HttpClientModule } from '@angular/common/http';
+import{ HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CarDetailComponent } from './components/car-detail/car-detail.component';
 import { CarImageComponent } from './components/car-image/car-image.component';
 import { VatAddedPipe } from './pipes/vat-added.pipe';
@@ -24,7 +24,9 @@ import { RentalComponent } from './components/rental/rental.component';
 import { RentalAddComponent } from './components/rental/rental-add/rental-add.component';
 import { UserComponent } from './components/user/user.component';
 import { CustomerComponent } from './components/customer/customer.component';
-import { UserAddComponent } from './components/user/user-add/user-add.component'
+import { UserAddComponent } from './components/user/user-add/user-add.component';
+import { LoginComponent } from './components/login/login.component'
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { UserAddComponent } from './components/user/user-add/user-add.component'
     UserComponent,
     CustomerComponent,
     UserAddComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,9 @@ import { UserAddComponent } from './components/user/user-add/user-add.component'
       positionClass:"toast-center-center"
     })
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

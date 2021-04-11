@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Rental } from 'src/app/Models/Rental';
 import { RentalDetail } from 'src/app/Models/rentalDetail';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -11,11 +12,13 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalComponent implements OnInit {
 
   rentalDetails:RentalDetail[]=[];
+  rentals:Rental[]=[];
 
-  constructor(private rentalService:RentalService,private toastrService:ToastrService ) { }
+  constructor(private rentalService:RentalService,private toastrService:ToastrService) { }
 
   ngOnInit(): void {
     this.GetRentalDetail()
+
   }
 
   GetRentalDetail(){
@@ -24,5 +27,11 @@ export class RentalComponent implements OnInit {
       this.toastrService.info(response.message,"Başarılı")
     })
   }
+  getRentals(){
+    this.rentalService.getRentals().subscribe(response=>{
+      this.rentals=response.data
+    })
+  }
+ 
 
 }

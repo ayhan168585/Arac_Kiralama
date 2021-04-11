@@ -8,6 +8,7 @@ export interface RentalDetail{
     colorId:number;
     bankId:number;
     creditCardId:number;
+    deposit:number;
     cardOperationId:number;
     firstName:string;
     lastName:string;
@@ -17,9 +18,11 @@ export interface RentalDetail{
     colorName:string;
     bankName:string;
     creditCardNumber:string;
+    findexScore:number;
     operationName:string;
     rentPrice:number;
     rentDate:Date;
     returnDate:Date;
+    totalPrice:number;
     description:string;
 }
